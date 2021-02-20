@@ -43,7 +43,7 @@ export default {
 
     computed: {
         ...mapGetters([
-            'getRecipe', 'getName', 'getImage', 'getIngredientsString', 'getInstructions'
+            'getRecipes', 'getRecipe', 'getName', 'getImage', 'getIngredientsString', 'getInstructions'
         ])
     },
 
@@ -53,16 +53,14 @@ export default {
             'addRecipe', 'resetRecipeState'
         ]),
 
-        handleSubmit(e) {
+        async handleSubmit(e) {
             e.preventDefault()
-            this.addRecipe(this.getRecipe)
-            
+            await this.addRecipe(this.getRecipe)
             this.resetRecipeState() 
 
             this.$nextTick(() => {
                 this.$bvModal.hide("new-recipe-modal-review")
             })
-
         }
     }
 }

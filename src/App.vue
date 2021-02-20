@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div>
-      <img alt="Vue logo" src="./assets/logo.png">
+    <div class="my-4">
+      <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
       <Navbar />
     </div>
 

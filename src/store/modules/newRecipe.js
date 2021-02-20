@@ -32,39 +32,39 @@ const actions = {
     },
 
     changeName({ commit }, name) {
-        commit('changeName', name)
+        commit('setName', name)
     },
 
     changeImage({ commit }, image) {
-        commit('changeImage', image)
+        commit('setImage', image)
     },
 
     changeIngredients({ commit }, ingredients) {
-        commit('changeIngredients', ingredients)
+        commit('setIngredients', ingredients)
     },
 
     changeInstructions({ commit }, instructions ) {
-        commit('changeInstructions', instructions)
+        commit('setInstructions', instructions)
     },
     
     addIngredient({ commit }, ingredient) {
-        commit('addIngredient', ingredient)
+        commit('setIngredient', ingredient)
     },
 
     addInstruction({ commit }, instruction) {
-        commit('addInstruction', instruction)
+        commit('setInstruction', instruction)
     },
 
     updateIngredient({ commit }, index, ingredient) {
-        commit('changeIngredient', index, ingredient)
+        commit('updateAndSetIngredient', index, ingredient)
     },
 
     removeIngredient({ commit }, index) {
-        commit('removeIngredient', index)
+        commit('removeAndSetIngredient', index)
     },
 
     removeInstruction({ commit }, index) {
-        commit('removeInstruction', index)
+        commit('removeAndSetInstruction', index)
     },
 }
 
@@ -73,39 +73,39 @@ const mutations = {
         Object.assign(state, getDefaultState())
     },
 
-    changeName(state, newName) {
+    setName(state, newName) {
         state.recipe.name = newName 
     },
 
-    changeImage(state, newImage) {
+    setImage(state, newImage) {
         state.recipe.image = newImage
     },
 
-    changeIngredients(state, newIngredients) {
+    setIngredients(state, newIngredients) {
         state.recipe.ingredients = newIngredients
     },
 
-    changeInstructions(state, newInstructions) {
+    setInstructions(state, newInstructions) {
         state.recipe.instructions = newInstructions
     },
 
-    addIngredient(state, newIngredient) {
+    setIngredient(state, newIngredient) {
         state.recipe.ingredients.push(newIngredient)
     },
 
-    addInstruction(state, newInstruction) {
+    setInstruction(state, newInstruction) {
         state.recipe.instructions.push(newInstruction)
     },
 
-    updateIngredient(state, index, newIngredient) {
+    updateAndSetIngredient(state, index, newIngredient) {
         state.recipe.ingredients.splice(index, 1, newIngredient)
     },
 
-    removeIngredient(state, index) {
+    removeAndSetIngredient(state, index) {
         state.recipe.ingredients.splice(index, 1)
     },
 
-    removeInstruction(state, index) {
+    removeAndSetInstruction(state, index) {
         state.recipe.instructions.splice(index, 1)
     }
 }

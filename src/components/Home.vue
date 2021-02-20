@@ -19,7 +19,7 @@
                             </b-card-body>
 
                             <b-card-footer>
-                                <b-button variant="info"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
+                                <b-button variant="info" :to="recipeRoute(recipe.name)"><b-icon-box-arrow-in-right></b-icon-box-arrow-in-right></b-button>
                             </b-card-footer>
                         </b-col>
                         </b-row>
@@ -32,17 +32,38 @@
 
 <script>
 import RecipeContainer from "src/components/RecipeModals/RecipeContainer.vue"
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
     name: "Home",
     components: {
         RecipeContainer
     },
 
+    data() {
+        return {
+            recipes: []
+        }
+    },
+
     computed: {
         ...mapGetters([
             'getRecipes'
-        ])
+        ]),
+    },
+    
+    methods: {
+        ...mapActions([
+            'getAllExistingRecipes'
+        ]),
+
+        
+        recipeRoute(recipeName) {
+            return '/recipe/' + recipeName
+        }
+    },
+
+    async created() {
+        await this.getAllExistingRecipes()
     }
 }
 </script>

@@ -1,18 +1,7 @@
+import axios from 'axios'
+
 const state = {
-    recipes: [
-        {
-            name: "Suon Kho Tieu",
-            image: null,
-            ingredients: null,
-            instructions: null 
-        },
-        {
-            name: "Bo Kho",
-            image: null,
-            ingredients: null,
-            instructions: null 
-        }
-    ]
+    recipes: []
 }
 
 const getters = {
@@ -20,13 +9,26 @@ const getters = {
 }
 
 const actions = {
-    addRecipe({ commit }, recipe) {
-        commit('addRecipe', recipe)
-    }
+
+    async getAllExistingRecipes({ commit }) {
+        const response = await axios.get("http://localhost:3000/recipes/");
+        commit('setAllExistingRecipes', response.data.result)
+    },
+
+    async addRecipe({ commit }, recipe) {
+        await axios.post('http://localhost:3000/recipes/insert', recipe)
+        commit('setNewRecipe', recipe)      
+    },
+
+    
 }
 
 const mutations = {
-    addRecipe(state, newRecipe) {
+    setAllExistingRecipes(state, recipes) {
+        state.recipes = recipes   
+    },
+
+    setNewRecipe(state, newRecipe) {
         state.recipes.push(newRecipe)
     }
 }
