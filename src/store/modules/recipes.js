@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from 'src/plugins/axios.js'
 
 const state = {
     recipes: []
@@ -11,12 +11,12 @@ const getters = {
 const actions = {
 
     async getAllExistingRecipes({ commit }) {
-        const response = await axios.get("http://localhost:3000/recipes/");
+        const response = await api.get('/recipes');
         commit('setAllExistingRecipes', response.data.result)
     },
 
     async addRecipe({ commit }, recipe) {
-        await axios.post('http://localhost:3000/recipes/insert', recipe)
+        await api.post('/insert', recipe)
         commit('setNewRecipe', recipe)      
     },
 

@@ -65,8 +65,16 @@
             </b-col>
 
             <b-col cols="6">
-                <b-img-lazy :src="this.recipe.image" fluid />
+                <!-- <div @mouseenter="changeOpacity" @mouseleave="resumeOpacity">
+                    <b-img ref="food_image" class="fade" :src="this.recipe.image" fluid />
+                    <b-button @click="editImageAction" class="edit_text" v-show="editImage">Click to change image</b-button>
+                </div> -->
+                <div class="text-center">
+                    <b-button class="my-3" variant="warning">Change Image</b-button>
+                    <b-img :src="this.recipe.image" fluid />
+                </div>
             </b-col>
+
 
         </b-row>
     </b-container>
@@ -75,13 +83,16 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import axios from 'axios'
+import api from 'src/plugins/axios.js'
 
 export default {
     name: 'Recipe',
 
     data() {
         return {
+
+            editImage: false, 
+
             oldRecipe: null, 
             recipe: null,
             tempIngredient: {
@@ -99,11 +110,6 @@ export default {
         }
     },
 
-    beforeUpdate() {
-        console.log("Old Recipe")
-        console.log(this.oldRecipe)
-    },
-
     computed: {
         ...mapGetters([
             'getRecipes'
@@ -112,12 +118,26 @@ export default {
         isEqual() {
             var newRecipe = JSON.parse(JSON.stringify(this.recipe))
             var isEqual = JSON.stringify(this.oldRecipe) === JSON.stringify(newRecipe)
-            console.log(isEqual)
             return isEqual;
         }
     },
 
     methods: {
+
+        editImageAction() {
+            alert("I Love You Baby")
+        },
+
+        // changeOpacity() {
+        //     this.$refs['food_image'].style.opacity = 0.2;
+        //     this.editImage = true;
+        // },
+
+        // resumeOpacity() {
+        //     this.$refs['food_image'].style.opacity = 1;
+        //     this.editImage = false;
+        // },
+
         ...mapActions([
           
         ]),
@@ -164,11 +184,15 @@ export default {
         },
 
         async handleUpdateRecipe() {
-            const response = await axios.post('http://localhost:3000/recipes/update', this.recipe)
+            const response = await api.post('/recipes/update', this.recipe)
             console.log(response.data)
             this.$router.push('/')
         }
     },
+
+    // mounted() {
+    //     this.$refs['food_image'].style.opacity = 1;
+    // },
 
     async created() {
         this.recipe = this.getRecipes.find(e => e.name === this.$route.params.id)
@@ -180,6 +204,30 @@ export default {
 <style scoped>
 /* .recipe-list {
     list-style-type: none;
+} */
+/* .fade {
+    opacity: 1;
+}
+
+.fade:hover {
+ opacity: 0.2
+} */
+
+/* .edit_text {
+    position: absolute;
+    top: 40%;
+ bottom: 40%;
+ right: 40%;
+ background: black;
+ color: white;
+ margin-bottom: 0;
+ font-family: sans-serif;
+ background-color: #ff9900;
+ border: none;
+ opacity: 0.6;
+ visibility: visible;
+ -webkit-transition: visibility 0s, opacity 0.5s linear; 
+ transition: visibility 0s, opacity 0.5s linear;
 } */
 
 </style>
