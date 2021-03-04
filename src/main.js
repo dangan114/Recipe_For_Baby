@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -22,9 +21,6 @@ const router = new VueRouter({
 })
 
 Vue.config.productionTip = false
-
-window.axios = axios
-axios.defaults.baseURL = 'http://localhost:3000'
 
 new Vue({
   store,
